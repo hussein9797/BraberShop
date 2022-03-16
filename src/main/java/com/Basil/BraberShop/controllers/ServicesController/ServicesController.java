@@ -27,7 +27,7 @@ public class ServicesController {
 
         try {
             servicesShopService.AddServiceToShop(shopServiceRequest);
-            return new ResponseEntity<>("service added successfully ", HttpStatus.OK);
+            return new ResponseEntity<>("{ \"message\": \"Added successfully \" }", HttpStatus.OK);
 
 
         } catch (Exception e) {
@@ -46,7 +46,7 @@ public class ServicesController {
         try {
             servicesShopService.DeleteById(service_id, shop_id);
 
-            return new ResponseEntity<>("service deleted  successfully ", HttpStatus.OK);
+            return new ResponseEntity<>("{ \"message\": \"deleted successfully \" }", HttpStatus.OK);
 
 
         } catch (Exception e) {
@@ -65,7 +65,7 @@ public class ServicesController {
         try {
             servicesShopService.updateService(shopServices);
 
-            return new ResponseEntity<>("service updated successfully ", HttpStatus.OK);
+            return new ResponseEntity<>("{ \"message\": \"updated successfully \" }", HttpStatus.OK);
 
 
         } catch (Exception e) {

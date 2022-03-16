@@ -23,7 +23,7 @@ public class ShopController {
 
         try {
             shopService.addShop(addShopRequest);
-            return new ResponseEntity<>("shop added successfully ", HttpStatus.OK);
+            return new ResponseEntity<>("{ \"message\": \"Add successfully \" }", HttpStatus.OK);
 
 
         }catch (Exception e){

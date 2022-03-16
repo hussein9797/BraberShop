@@ -22,7 +22,7 @@ public class UserManagementController {
     ResponseEntity<Object> userRegister(@RequestBody UserRegisterRequest userRegisterRequest) throws Exception {
         try {
             userDetailsService.registerUser(userRegisterRequest);
-            return new ResponseEntity<>("massage :\"Registered Successfully\"", HttpStatus.OK);
+            return new ResponseEntity<>("{ \"message\": \"Registered successfully \" }", HttpStatus.OK);
 
 
         } catch (Exception e) {
@@ -36,12 +36,12 @@ public class UserManagementController {
          ResponseEntity<Object> shopRegister(@RequestBody ShopRegisterRequest shopRegisterRequest) {
         try {
             userDetailsService.registerShop(shopRegisterRequest);
-            return new ResponseEntity<>("massage :\"Registered Successfully\"", HttpStatus.OK);
+            return new ResponseEntity<>("{ \"message\": \"Registered successfully \" }", HttpStatus.OK);
 
 
         } catch (Exception e) {
             e.printStackTrace();
-            return new ResponseEntity<>("massage :\"UserName Already Exist Please Choose Another UserName\"", HttpStatus.CONFLICT);
+            return new ResponseEntity<>("{ \"message\": \"User name already exist please choose another username\" }", HttpStatus.CONFLICT);
 
 
         }

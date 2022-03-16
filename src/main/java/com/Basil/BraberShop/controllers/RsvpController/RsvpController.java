@@ -24,7 +24,7 @@ public class RsvpController {
         try {
             rsvpService.Book(bookingRequest);
 
-            return new ResponseEntity<>("massage :\" Booking  Successful  \"", HttpStatus.OK);
+            return new ResponseEntity<>("{ \"message\": \"booking success \" }", HttpStatus.OK);
 
 
         } catch (Exception e) {
@@ -62,7 +62,7 @@ public class RsvpController {
             rsvpService.deleteRsvp(id);
 
 
-            return new ResponseEntity<>("massage :\" Rsvp Deleted Successfully  \"", HttpStatus.OK);
+            return new ResponseEntity<>("{ \"message\": \"deleted successfully \" }", HttpStatus.OK);
 
 
         } catch (Exception e) {

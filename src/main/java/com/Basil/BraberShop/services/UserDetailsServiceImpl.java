@@ -56,7 +56,7 @@ public class UserDetailsServiceImpl implements UserDetailsService,UserService{
             user.setUsername(userRegisterRequest.getUser_name());
             user.setPassword(passwordEncoder.encode(userRegisterRequest.getPassword()));
             user.setEnabled(true);
-            user.setUserRole(UserRole.SHOP_OWNER);//defualtRule
+            user.setUserRole(UserRole.VISITOR);//defualtRule
             userRepository.save(user);
 
         } catch (Exception e) {
