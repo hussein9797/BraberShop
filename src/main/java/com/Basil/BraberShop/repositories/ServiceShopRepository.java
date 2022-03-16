@@ -15,8 +15,5 @@ public interface ServiceShopRepository extends JpaRepository<ShopServices,Long> 
     List<ShopServices> findByServiceNameContaining(String serviceName);
     List<ShopServices> findByServiceNameContainingAndCostLessThanEqual(String serviceName, Double cost);
 
-
-
-
-
+    
 }

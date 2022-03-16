@@ -72,18 +72,18 @@ public class ShopServiceImpl implements ShopService {
 
         try {
             if (!shopFilterRequest.getName().isEmpty() && shopFilterRequest.getCity()!=null && shopFilterRequest.getRate()!=null){
-            List<Shop> shops=shopRepository.findByShopNameAndRateAndCity(shopFilterRequest.getName(),shopFilterRequest.getRate(),shopFilterRequest.getCity());
+            List<Shop> shops=shopRepository.findByShopNameAndRateLessThanAndCity(shopFilterRequest.getName(),shopFilterRequest.getRate(),shopFilterRequest.getCity());
             return  shops;}
             if (!shopFilterRequest.getName().isEmpty() && shopFilterRequest.getCity()!=null){
                 List<Shop> shops=shopRepository.findByShopNameAndCity(shopFilterRequest.getName(),shopFilterRequest.getCity());
               return shops;
             }
             if (!shopFilterRequest.getName().isEmpty() && shopFilterRequest.getRate()!=null){
-                List<Shop> shops=shopRepository.findByShopNameAndRate(shopFilterRequest.getName(),shopFilterRequest.getRate());
+                List<Shop> shops=shopRepository.findByShopNameAndRateLessThan(shopFilterRequest.getName(),shopFilterRequest.getRate());
               return shops;
             }
             if ( shopFilterRequest.getCity()!=null && shopFilterRequest.getRate()!=null){
-                List<Shop> shops=shopRepository.findByRateAndCity(shopFilterRequest.getRate(),shopFilterRequest.getCity());
+                List<Shop> shops=shopRepository.findByRateLessThanAndCity(shopFilterRequest.getRate(),shopFilterRequest.getCity());
                 return  shops;}
            if (shopFilterRequest.getRate()==null && shopFilterRequest.getCity()==null){
                List<Shop> shops=shopRepository.findByShopName(shopFilterRequest.getName());
@@ -91,7 +91,7 @@ public class ShopServiceImpl implements ShopService {
 
            }
            if (shopFilterRequest.getName()==null && shopFilterRequest.getCity()==null){
-               List<Shop> shops=shopRepository.findByRateGreaterThan(shopFilterRequest.getRate());
+               List<Shop> shops=shopRepository.findByRateLessThan(shopFilterRequest.getRate());
                return shops;
 
            }
