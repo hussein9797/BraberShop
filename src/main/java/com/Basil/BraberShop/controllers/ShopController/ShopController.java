@@ -35,7 +35,8 @@ public class ShopController {
 
     }
     @PostMapping("/getAll")
-    @PreAuthorize("hasAuthority('shop_read')")
+    @PreAuthorize("hasAnyRole('VISITOR')")
+
     ResponseEntity<Object> getAllShops(){
 
         try {
@@ -52,7 +53,7 @@ public class ShopController {
 
     }
     @PostMapping("/shop_filter")
-    @PreAuthorize("hasAuthority('shop_read')")
+    @PreAuthorize("hasAnyRole('VISITOR')")
     ResponseEntity<Object> getShopsByFilter(@RequestBody ShopFilterRequest shopFilterRequest){
 
         try {
@@ -69,7 +70,7 @@ public class ShopController {
 
     }
     @GetMapping("/getShopByUser/{UserName}")
-    @PreAuthorize("hasAuthority('shop_read')")
+    @PreAuthorize("hasAuthority('shop_write')")
     ResponseEntity<Object> getShopByUserName(@PathVariable ("UserName")  String UserName){
 
         try {
