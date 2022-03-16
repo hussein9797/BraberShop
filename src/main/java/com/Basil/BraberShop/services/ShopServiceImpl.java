@@ -5,7 +5,9 @@ import com.Basil.BraberShop.Excptions.NotFoundException;
 import com.Basil.BraberShop.dto.request.AddShopRequest;
 import com.Basil.BraberShop.dto.request.ShopFilterRequest;
 import com.Basil.BraberShop.models.Shop;
+import com.Basil.BraberShop.models.User;
 import com.Basil.BraberShop.repositories.ShopRepository;
+import com.Basil.BraberShop.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,18 +20,22 @@ public class ShopServiceImpl implements ShopService {
 
     @Autowired
     ShopRepository shopRepository;
+    @Autowired
+    UserRepository userRepository;
 
 
     @Override
-    public void addShop(AddShopRequest addShopRequest) {
+    public void updateShop(AddShopRequest addShopRequest) {
         try {
-            Shop newShop = new Shop();
-            newShop.setShopName(addShopRequest.getShop_name());
-            newShop.setRate(addShopRequest.getRate());
-            newShop.setCity(addShopRequest.getCity());
-            newShop.setLat(addShopRequest.getLat());
-            newShop.setLng(addShopRequest.getLng());
-            shopRepository.save(newShop);
+
+            Shop shop =this.getShopByUserName(addShopRequest.getUsername());
+         //   Shop newShop = new Shop();
+            shop.setShopName(addShopRequest.getShop_name());
+            shop.setRate(addShopRequest.getRate());
+            shop.setCity(addShopRequest.getCity());
+            shop.setLat(addShopRequest.getLat());
+            shop.setLng(addShopRequest.getLng());
+            shopRepository.save(shop);
         } catch (Exception e) {
             e.printStackTrace();
             throw e;
@@ -64,32 +70,32 @@ public class ShopServiceImpl implements ShopService {
 
 
         try {
-            if (!shopFilterRequest.getName().isEmpty() && !shopFilterRequest.getCity().isEmpty() && !shopFilterRequest.getRate().isEmpty()){
-            List<Shop> shops=shopRepository.findByShopNameInAndRateInAndCityIn(shopFilterRequest.getName(),shopFilterRequest.getRate(),shopFilterRequest.getCity());
+            if (!shopFilterRequest.getName().isEmpty() && !shopFilterRequest.getCity().isEmpty() && shopFilterRequest.getRate()!=null){
+            List<Shop> shops=shopRepository.findByShopNameAndRateAndCity(shopFilterRequest.getName(),shopFilterRequest.getRate(),shopFilterRequest.getCity());
             return  shops;}
             if (!shopFilterRequest.getName().isEmpty() && !shopFilterRequest.getCity().isEmpty()){
-                List<Shop> shops=shopRepository.findByShopNameInAndCityIn(shopFilterRequest.getName(),shopFilterRequest.getCity());
+                List<Shop> shops=shopRepository.findByShopNameAndCity(shopFilterRequest.getName(),shopFilterRequest.getCity());
               return shops;
             }
-            if (!shopFilterRequest.getName().isEmpty() && !shopFilterRequest.getRate().isEmpty()){
-                List<Shop> shops=shopRepository.findByShopNameInAndRateIn(shopFilterRequest.getName(),shopFilterRequest.getRate());
+            if (!shopFilterRequest.getName().isEmpty() && shopFilterRequest.getRate()!=null){
+                List<Shop> shops=shopRepository.findByShopNameAndRate(shopFilterRequest.getName(),shopFilterRequest.getRate());
               return shops;
             }
-            if ( !shopFilterRequest.getCity().isEmpty() && !shopFilterRequest.getRate().isEmpty()){
-                List<Shop> shops=shopRepository.findByRateInAndCityIn(shopFilterRequest.getRate(),shopFilterRequest.getCity());
+            if ( !shopFilterRequest.getCity().isEmpty() && shopFilterRequest.getRate()!=null){
+                List<Shop> shops=shopRepository.findByRateAndCity(shopFilterRequest.getRate(),shopFilterRequest.getCity());
                 return  shops;}
-           if (shopFilterRequest.getRate().isEmpty() && shopFilterRequest.getCity().isEmpty()){
-               List<Shop> shops=shopRepository.findByShopNameIn(shopFilterRequest.getName());
+           if (shopFilterRequest.getRate()!=null && shopFilterRequest.getCity().isEmpty()){
+               List<Shop> shops=shopRepository.findByShopName(shopFilterRequest.getName());
                return shops;
 
            }
            if (shopFilterRequest.getName().isEmpty() && shopFilterRequest.getCity().isEmpty()){
-               List<Shop> shops=shopRepository.findByRateIn(shopFilterRequest.getRate());
+               List<Shop> shops=shopRepository.findByRateGreaterThan(shopFilterRequest.getRate());
                return shops;
 
            }
-           if (shopFilterRequest.getName().isEmpty() && shopFilterRequest.getRate().isEmpty()){
-               List<Shop> shops=shopRepository.findByCityIn(shopFilterRequest.getCity());
+           if (shopFilterRequest.getName().isEmpty() && shopFilterRequest.getRate()!=null){
+               List<Shop> shops=shopRepository.findByCity(shopFilterRequest.getCity());
                return shops;
 
            }
@@ -101,6 +107,14 @@ public class ShopServiceImpl implements ShopService {
         }
 
 
+
+    }
+
+    @Override
+    public Shop getShopByUserName(String username) {
+        User user = userRepository.findByUsername(username);
+        Shop shop=shopRepository.findByOwner(user);
+        return shop;
 
     }
 }

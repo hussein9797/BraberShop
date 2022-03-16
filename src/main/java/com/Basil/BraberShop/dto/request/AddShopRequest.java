@@ -3,7 +3,7 @@ package com.Basil.BraberShop.dto.request;
 import java.io.Serializable;
 
 public class AddShopRequest implements Serializable {
-
+    String username;
     String shop_name;
     String city;
     Double rate;
@@ -12,6 +12,15 @@ public class AddShopRequest implements Serializable {
 
 
     public AddShopRequest() {
+    }
+
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public void setShop_name(String shop_name) {

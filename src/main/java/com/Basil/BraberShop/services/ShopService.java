@@ -9,9 +9,10 @@ import java.util.List;
 public interface ShopService {
 
 
-      void addShop(AddShopRequest addShopRequest);
+      void updateShop(AddShopRequest addShopRequest);
       Shop getShopById(Long id);
       List<Shop> getAllShop();
       List<Shop> getShopsByFilter(ShopFilterRequest shopFilterRequest);
+      Shop getShopByUserName(String username);
 
 }

@@ -75,9 +75,9 @@ public class ServicesController {
 
 
     }
-    @GetMapping("services_filter")
+    @PostMapping("services_filter")
     @PreAuthorize("hasAuthority('shop_write')")
-        // @PreAuthorize("hasAnyRole('SHOP_OWNER')")
+
     ResponseEntity<Object> servicesFilter(@RequestBody ShopAndServiceFilterRequest shopAndServiceFilterRequest) {
 
         try {

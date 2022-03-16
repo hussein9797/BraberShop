@@ -1,39 +1,37 @@
 package com.Basil.BraberShop.dto.request;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 public class ShopFilterRequest implements Serializable {
 
-    List<String> name =new ArrayList<>();
-    List<String> city = new ArrayList<>();
-    List<String> rate=new ArrayList<>();
+    String name ;
+    String city;
+    Double rate;
 
     public ShopFilterRequest() {
     }
 
-    public List<String> getName() {
+    public String getName() {
         return name;
     }
 
-    public void setName(List<String> name) {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public List<String> getCity() {
+    public String getCity() {
         return city;
     }
 
-    public void setCity(List<String> city) {
+    public void setCity(String city) {
         this.city = city;
     }
 
-    public List<String> getRate() {
+    public Double getRate() {
         return rate;
     }
 
-    public void setRate(List<String> rate) {
+    public void setRate(Double rate) {
         this.rate = rate;
     }
 }
