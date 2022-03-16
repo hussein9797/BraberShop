@@ -71,10 +71,10 @@ public class ShopServiceImpl implements ShopService {
 
 
         try {
-            if (!shopFilterRequest.getName().isEmpty() && !shopFilterRequest.getCity().isEmpty() && shopFilterRequest.getRate()!=null){
+            if (!shopFilterRequest.getName().isEmpty() && shopFilterRequest.getCity()!=null && shopFilterRequest.getRate()!=null){
             List<Shop> shops=shopRepository.findByShopNameAndRateAndCity(shopFilterRequest.getName(),shopFilterRequest.getRate(),shopFilterRequest.getCity());
             return  shops;}
-            if (!shopFilterRequest.getName().isEmpty() && !shopFilterRequest.getCity().isEmpty()){
+            if (!shopFilterRequest.getName().isEmpty() && shopFilterRequest.getCity()!=null){
                 List<Shop> shops=shopRepository.findByShopNameAndCity(shopFilterRequest.getName(),shopFilterRequest.getCity());
               return shops;
             }
@@ -82,15 +82,15 @@ public class ShopServiceImpl implements ShopService {
                 List<Shop> shops=shopRepository.findByShopNameAndRate(shopFilterRequest.getName(),shopFilterRequest.getRate());
               return shops;
             }
-            if ( !shopFilterRequest.getCity().isEmpty() && shopFilterRequest.getRate()!=null){
+            if ( shopFilterRequest.getCity()!=null && shopFilterRequest.getRate()!=null){
                 List<Shop> shops=shopRepository.findByRateAndCity(shopFilterRequest.getRate(),shopFilterRequest.getCity());
                 return  shops;}
-           if (shopFilterRequest.getRate()!=null && shopFilterRequest.getCity().isEmpty()){
+           if (shopFilterRequest.getRate()==null && shopFilterRequest.getCity()==null){
                List<Shop> shops=shopRepository.findByShopName(shopFilterRequest.getName());
                return shops;
 
            }
-           if (shopFilterRequest.getName().isEmpty() && shopFilterRequest.getCity().isEmpty()){
+           if (shopFilterRequest.getName()==null && shopFilterRequest.getCity()==null){
                List<Shop> shops=shopRepository.findByRateGreaterThan(shopFilterRequest.getRate());
                return shops;
 

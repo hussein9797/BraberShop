@@ -1,6 +1,8 @@
 package com.Basil.BraberShop.dto.request;
 
-public class ShopAndServiceFilterRequest{
+import java.io.Serializable;
+
+public class ShopAndServiceFilterRequest implements Serializable {
 
     ShopFilterRequest shopFilterRequest;
 
@@ -13,6 +15,7 @@ public class ShopAndServiceFilterRequest{
     public void setServicesFilterRequest(ServicesFilterRequest servicesFilterRequest) {
         this.servicesFilterRequest = servicesFilterRequest;
     }
+
 
     public ShopFilterRequest getShopFilterRequest() {
         return shopFilterRequest;
