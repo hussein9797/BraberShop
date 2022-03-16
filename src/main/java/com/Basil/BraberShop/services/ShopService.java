@@ -11,7 +11,7 @@ public interface ShopService {
 
       void updateShop(AddShopRequest addShopRequest);
       Shop getShopById(Long id);
-      List<Shop> getAllShop();
+      List<List<Shop>> getAllShop();
       List<Shop> getShopsByFilter(ShopFilterRequest shopFilterRequest);
       Shop getShopByUserName(String username);
 
