@@ -8,11 +8,11 @@ import java.util.List;
 
 public interface ShopRepository extends JpaRepository<Shop,Long> {
 
-    List<Shop> findByShopNameAndRateLessThanAndCity(String names, Double Rates, String locations);
-    List<Shop> findByShopNameAndCity(String names, String locations);
-    List<Shop> findByShopNameAndRateLessThan(String names, Double rates);
+    List<Shop> findByShopNameContainingAndRateLessThanAndCity(String names, Double Rates, String locations);
+    List<Shop> findByShopNameContainingAndCity(String names, String locations);
+    List<Shop> findByShopNameContainingAndRateLessThan(String names, Double rates);
     List<Shop> findByRateLessThanAndCity(Double rates, String location);
-    List<Shop> findByShopName(String name);
+    List<Shop> findByShopNameContaining(String name);
     List<Shop> findByRateLessThan(Double rate);
     List<Shop> findByCity(String location);
     Shop findByOwner(User user);
