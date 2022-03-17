@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -131,21 +132,21 @@ serviceShopRepository.deleteById(Service_id);
     }
 
     @Override
-    public   List<List<Shop>> ShopAndServiceFilter(ShopAndServiceFilterRequest shopAndServiceFilterRequest) {
-        List<List<Shop>> FinalResultNoServiceFound= new ArrayList<>();
+    public   List<Shop> ShopAndServiceFilter(ShopAndServiceFilterRequest shopAndServiceFilterRequest) {
+        List<Shop> FinalResultNoServiceFound= new ArrayList<>();
         List<Shop> FilterByShopList=new ArrayList<>();
         List<ShopServices> FilterResult =new ArrayList<>();
-        List<List<Shop>> FinalResult= new ArrayList<>();
+        List<Shop> FinalResult= new ArrayList<>();
 
 
         if (shopAndServiceFilterRequest.shop_filter_request_is_set()) {
          FilterByShopList = shopService.getShopsByFilter(shopAndServiceFilterRequest.getShopFilterRequest());
-         FinalResultNoServiceFound.add(FilterByShopList);
+         FinalResultNoServiceFound.add((Shop) FilterByShopList);
         }
         else {
             FilterResult = this.ServiceFilter(shopAndServiceFilterRequest.getServicesFilterRequest());
             for (ShopServices shopServices: FilterResult) {
-                FinalResult.add(shopServices.getShopList());
+                FinalResult.add((Shop) shopServices.getShopList());
 
             }
             return  FinalResult;
@@ -170,7 +171,7 @@ serviceShopRepository.deleteById(Service_id);
                  }
 
                  for (ShopServices shopServices : FilterResult) {
-                     FinalResult.add(shopServices.getShopList());
+                     FinalResult.add((Shop) shopServices.getShopList());
                  }
 
 

@@ -16,7 +16,7 @@ public interface ServicesShopService  {
     void updateService(ShopServices shopServices);
     List<ShopServices>  ServiceFilter(ServicesFilterRequest  servicesFilterRequest);
 
-     List<List<Shop>> ShopAndServiceFilter(ShopAndServiceFilterRequest shopAndServiceFilterRequest);
+     List<Shop> ShopAndServiceFilter(ShopAndServiceFilterRequest shopAndServiceFilterRequest);
 
 
 
