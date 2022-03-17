@@ -90,6 +90,30 @@ public class RsvpServiceImpl implements RsvpService {
         }
         return null;
     }
+    @Override
+    public List<RsvpResponse> getMyRsvpShop(String Username) {
+        try{
+
+            Shop shop =shopService.getShopByUserName(Username);
+            List< ShopRSVP> rsvp=    rsvpRepository.findAllByShop (shop);
+           List<RsvpResponse>  result =new ArrayList<>();
+            for (ShopRSVP  r: rsvp
+                 ) {
+                Location location=new Location();
+                location.setLat(r.getShop().getLat());
+                location.setLng(r.getShop().getLng());
+                RsvpResponse rsvpResponse1 =new RsvpResponse(shop.getShopName(),r.getShopServices().getServiceName(),r.getShopServices().getCost(),r.getShopServices().getDuration(),r.getShop().getShopName(),r.getShopServices().getService_type(),r.getRsvpDate(),r.getShop().getCity(),location,r.getShop().getRate());
+                result.add(rsvpResponse1);
+
+
+            }
+            return result;
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
 
     @Override
     public void deleteRsvp(Long id) {

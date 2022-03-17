@@ -53,6 +53,23 @@ public class RsvpController {
         }
 
 
+    }   @GetMapping("/getShopRsvp/{UserName}")
+    public ResponseEntity<Object> getMyRsvpShop(@PathVariable ("UserName") String UserName){
+
+        try {
+
+
+            return new ResponseEntity<>(rsvpService.getMyRsvpShop(UserName), HttpStatus.OK);
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+
+
+        }
+
+
     }
 
         @DeleteMapping("deleteRsvp/{id}")
